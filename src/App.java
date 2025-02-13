@@ -15,7 +15,7 @@ public class App {
     }
 
     List<BufferedReader> openedFiles = getOpenFiles(args);
-    printFiles(openedFiles);
+    fileParser(openedFiles);
     closeFiles(openedFiles);
 
   }
@@ -26,8 +26,7 @@ public class App {
 
     for (String filename : filenames) {
       try {
-        BufferedReader openedFile = new BufferedReader(
-            new FileReader(filename));
+        BufferedReader openedFile = new BufferedReader(new FileReader(filename));
         openedFiles.add(openedFile);
 
       } catch (FileNotFoundException e) {
@@ -56,7 +55,7 @@ public class App {
     }
   }
 
-  // метод, к-ый закрвывает все файлы
+  // метод, к-ый закрывает все файлы
   public static void closeFiles(List<BufferedReader> openedFiles) {
     for (BufferedReader openedFile : openedFiles) {
       try {
@@ -68,7 +67,50 @@ public class App {
       }
     }
   }
-  
+
+  public static boolean isInteger(String str) {
+    try {
+      Long.parseLong(str);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  public static boolean isFloat(String str) {
+    try {
+      Double.parseDouble(str);
+      return true;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  public static void fileParser(List<BufferedReader> openedFiles) {
+    try {
+      boolean filesHaveLines = true;
+      while (filesHaveLines) {
+        filesHaveLines = false;
+        for (BufferedReader openedFile : openedFiles) {
+          String line = openedFile.readLine();
+          if (line != null) {
+            if (isInteger(line)) {
+              System.out.println("Целое число: " + line);
+            } else if (isFloat(line)) {
+              System.out.println("Дробное число: " + line);
+            } else {
+              System.out.println("Строка: " + line);
+            }
+            filesHaveLines = true;
+          }
+        }
+      }
+    } catch (IOException e) {
+      System.out.println("Ошибка при чтении файлов.");
+    }
+  }
+
+
 }
 
 
