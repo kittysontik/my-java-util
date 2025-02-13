@@ -7,6 +7,20 @@ import java.util.List;
 
 public class App {
 
+  // входная точка для запуска программы
+  public static void main(String[] args) {
+    if (args.length < 1) {
+      System.out.println("Ошибка: укажите хотя бы один файл.");
+      return;
+    }
+
+    List<BufferedReader> openedFiles = getOpenFiles(args);
+    printFiles(openedFiles);
+    closeFiles(openedFiles);
+
+  }
+
+  // метод, к-ый получает открытые файлы
   public static List<BufferedReader> getOpenFiles(String[] filenames) {
     List<BufferedReader> openedFiles = new ArrayList<>();
 
@@ -23,12 +37,8 @@ public class App {
     return openedFiles;
   }
 
-  public static void main(String[] args) {
-    if (args.length < 1) {
-      System.out.println("Ошибка: укажите хотя бы один файл.");
-      return;
-    }
-    List<BufferedReader> openedFiles = getOpenFiles(args);
+  // метод для поочередного построчного вывода содержимого файла в консоль
+  public static void printFiles(List<BufferedReader> openedFiles) {
     try {
       boolean filesHaveLines = true;
       while (filesHaveLines) {
@@ -40,12 +50,14 @@ public class App {
             filesHaveLines = true;
           }
         }
-
       }
     } catch (IOException e) {
       System.out.println("Ошибка при чтении файлов.");
     }
-    // Закрываем все файлы
+  }
+
+  // метод, к-ый закрвывает все файлы
+  public static void closeFiles(List<BufferedReader> openedFiles) {
     for (BufferedReader openedFile : openedFiles) {
       try {
         if (openedFile != null) {
@@ -56,6 +68,7 @@ public class App {
       }
     }
   }
+  
 }
 
 
