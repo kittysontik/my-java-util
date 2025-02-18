@@ -1,11 +1,10 @@
-package org.utility;
+package main.java.org.utility;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 
 public class FileParser {
-
 
   public static void parseFile(List<BufferedReader> openedFiles) {
     boolean filesHaveLines = true;
@@ -52,7 +51,6 @@ public class FileParser {
       return false;
     }
   }
-
 
 }
 

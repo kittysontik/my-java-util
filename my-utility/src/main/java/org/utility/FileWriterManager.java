@@ -1,4 +1,4 @@
-package org.utility;
+package main.java.org.utility;
 
 
 import java.io.*;
@@ -9,7 +9,6 @@ public class FileWriterManager {
   static BufferedWriter intWriter;
   static BufferedWriter floatWriter;
   static BufferedWriter stringWriter;
-
 
   public static void initWriters(String prefix, String outputDirectory, boolean appendMode) {
     try {

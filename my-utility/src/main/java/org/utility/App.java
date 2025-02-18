@@ -1,12 +1,9 @@
-package org.utility;
-
+package main.java.org.utility;
 
 import java.io.BufferedReader;
 import java.util.List;
 
 public class App {
-
-
   // входная точка для запуска программы
   public static void main(String[] args) {
     try {
@@ -29,7 +26,6 @@ public class App {
       FileWriterManager.closeWriters();
     }
   }
-
 
 }
 

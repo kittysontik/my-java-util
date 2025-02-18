@@ -1,6 +1,6 @@
-package org.utility;
+package main.java.org.utility;
 
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArgumentParser {
@@ -58,7 +58,4 @@ public class ArgumentParser {
     return fileNames;
   }
 
-  public void setOutputDirectory(String dir) {
-    this.outputDirectory = dir;
-  }
 }
