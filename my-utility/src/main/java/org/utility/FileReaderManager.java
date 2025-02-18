@@ -1,14 +1,15 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+package org.utility;
+
+
+import java.io.*;
 import java.util.List;
+import java.util.ArrayList;
+
 
 public class FileReaderManager {
 
   // метод, к-ый получает открытые файлы
-  public static List<BufferedReader> getOpenedFiles(String[] filenames) {
+  public static List<BufferedReader> getOpenedFiles(List<String> filenames) {
     List<BufferedReader> openedFiles = new ArrayList<>();
 
     for (String filename : filenames) {
