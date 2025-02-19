@@ -5,9 +5,9 @@ import java.util.List;
 
 public class ArgumentParser {
 
+  private final List<String> fileNames = new ArrayList<>();
   private boolean appendMode = false;
   private String outputDirectory = System.getProperty("user.dir"); // Текущая директория
-  private final List<String> fileNames = new ArrayList<>();
   private String prefix = "";
   private boolean shortStatOption = false;
   private boolean fullStatOption = false;
@@ -67,13 +67,12 @@ public class ArgumentParser {
     return fileNames;
   }
 
-  public boolean isShortStatOption(){
+  public boolean isShortStatOption() {
     return shortStatOption;
   }
 
-  public boolean isFullStatOption(){
+  public boolean isFullStatOption() {
     return fullStatOption;
   }
-
 
 }

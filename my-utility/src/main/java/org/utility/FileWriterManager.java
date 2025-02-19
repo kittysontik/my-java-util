@@ -7,12 +7,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileWriterManager {
+
+  private static final Logger logger = Logger.getLogger(FileWriterManager.class.getName());
 
   static BufferedWriter intWriter;
   static BufferedWriter floatWriter;
   static BufferedWriter stringWriter;
+
 
   // Приватный конструктор, чтобы предотвратить создание экземпляров
   private FileWriterManager() {
@@ -30,7 +35,7 @@ public class FileWriterManager {
       stringWriter = new BufferedWriter(
           new FileWriter(fileNames.get("strings"), appendMode));
     } catch (IOException e) {
-      System.out.println("Ошибка при создании файлов для записи.");
+      logger.log(Level.SEVERE, "Ошибка при создании файлов для записи.");
     }
   }
 
@@ -39,9 +44,11 @@ public class FileWriterManager {
       writer.write(line);
       writer.newLine();
 
+
     } catch (IOException e) {
-      System.out.println("Ошибка при записи строки: " + line);
+      logger.log(Level.WARNING, String.format("Ошибка при записи строки: %s", line), e);
     }
+
   }
 
   // метод для получения итогового названия выходного файла с префиксом и путем
@@ -65,7 +72,7 @@ public class FileWriterManager {
         stringWriter.close();
       }
     } catch (IOException e) {
-      System.out.println("Ошибка при закрытии файлов.");
+      logger.log(Level.SEVERE, "Ошибка при закрытии файлов.");
     }
   }
 

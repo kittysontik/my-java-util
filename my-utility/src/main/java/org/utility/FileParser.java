@@ -4,8 +4,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class FileParser {
+
+  private static final Logger logger = Logger.getLogger(FileParser.class.getName());
 
   // Приватный конструктор, чтобы предотвратить создание экземпляров
   private FileParser() {
@@ -25,7 +30,7 @@ public class FileParser {
             filesHaveLines = true;
           }
         } catch (IOException e) {
-          System.out.println("Ошибка при чтении файлов.");
+          logger.log(Level.SEVERE, "Ошибка при чтении файлов.");
         }
       }
     }

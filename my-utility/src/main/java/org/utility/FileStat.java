@@ -2,6 +2,7 @@ package org.utility;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 
 public class FileStat {
 
@@ -61,14 +62,18 @@ public class FileStat {
     return stringCount;
   }
 
+  // Метод для вычисления среднего значения для целых чисел
   public static String getIntAverage() {
-    return intCount > 0 ? new BigDecimal(intSum).divide(BigDecimal.valueOf(intCount), 2,
-        BigDecimal.ROUND_HALF_UP).toString() : "N/A";
+    return intCount > 0 ? new BigDecimal(intSum)
+        .divide(BigDecimal.valueOf(intCount), 2, RoundingMode.HALF_UP)
+        .toString() : "N/A";
   }
 
+  // Метод для вычисления среднего значения для чисел с плавающей точкой
   public static String getFloatAverage() {
-    return floatCount > 0 ? floatSum.divide(BigDecimal.valueOf(floatCount), 2,
-        BigDecimal.ROUND_HALF_UP).toString() : "N/A";
+    return floatCount > 0 ? floatSum
+        .divide(BigDecimal.valueOf(floatCount), 2, RoundingMode.HALF_UP)
+        .toString() : "N/A";
   }
 
   public static String getShortStat() {

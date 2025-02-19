@@ -7,9 +7,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class FileReaderManager {
+
+  private static final Logger logger = Logger.getLogger(FileReaderManager.class.getName());
 
   // Приватный конструктор, чтобы предотвратить создание экземпляров
   private FileReaderManager() {
@@ -27,7 +31,7 @@ public class FileReaderManager {
         openedFiles.add(openedFile);
 
       } catch (FileNotFoundException e) {
-        System.out.println("Ошибка: файл '" + filename + "' не найден.");
+        logger.log(Level.SEVERE, "Ошибка: файл '" + filename + "' не найден.");
       }
     }
     return openedFiles;
@@ -41,7 +45,7 @@ public class FileReaderManager {
           openedFile.close();
         }
       } catch (IOException e) {
-        System.out.println("Ошибка при закрытии файла.");
+        logger.log(Level.SEVERE, "Ошибка при закрытии файла.");
       }
     }
   }

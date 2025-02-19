@@ -2,8 +2,12 @@ package org.utility;
 
 import java.io.BufferedReader;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App {
+
+  private static final Logger logger = Logger.getLogger(App.class.getName());
 
   // входная точка для запуска программы
   public static void main(String[] args) {
@@ -22,12 +26,12 @@ public class App {
       FileReaderManager.closeFiles(openedFiles);
       if (parser.isShortStatOption()) {
         System.out.println(FileStat.getShortStat());  // Печать статистики
-      } else if (parser.isFullStatOption()){
+      } else if (parser.isFullStatOption()) {
         System.out.println(FileStat.getFullStat());
       }
 
     } catch (IllegalArgumentException e) {
-      System.out.println(e.getMessage());
+      logger.log(Level.SEVERE, e.getMessage());
       System.exit(1);
     } finally {
       FileWriterManager.closeWriters();
