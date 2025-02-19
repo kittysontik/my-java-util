@@ -1,6 +1,5 @@
 package org.utility;
 
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -17,7 +16,6 @@ public class FileWriterManager {
   static BufferedWriter intWriter;
   static BufferedWriter floatWriter;
   static BufferedWriter stringWriter;
-
 
   // Приватный конструктор, чтобы предотвратить создание экземпляров
   private FileWriterManager() {
@@ -44,11 +42,9 @@ public class FileWriterManager {
       writer.write(line);
       writer.newLine();
 
-
     } catch (IOException e) {
       logger.log(Level.WARNING, String.format("Ошибка при записи строки: %s", line), e);
     }
-
   }
 
   // метод для получения итогового названия выходного файла с префиксом и путем
@@ -80,6 +76,3 @@ public class FileWriterManager {
     return outputDirectory + File.separator + prefix + fileName;
   }
 }
-
-
-

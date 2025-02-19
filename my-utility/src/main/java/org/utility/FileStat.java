@@ -1,27 +1,23 @@
 package org.utility;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.math.RoundingMode;
-
 public class FileStat {
 
-  // Краткая статистика
   private static int intCount = 0;
   private static int floatCount = 0;
   private static int stringCount = 0;
 
-  // Полная статистика для чисел
-  private static BigInteger intSum = BigInteger.ZERO;
-  private static long intMin = Long.MAX_VALUE;
-  private static long intMax = Long.MIN_VALUE;
-  private static BigDecimal floatSum = BigDecimal.ZERO;
-  private static double floatMin = Double.MAX_VALUE;
-  private static double floatMax = Double.MIN_VALUE;
+  private static long intSum = 0;
+  private static long intMin = Long.MAX_VALUE; // Изначально максимально возможное значение
+  private static long intMax = Long.MIN_VALUE; // Изначально минимально возможное значение
+  private static double intAvg = 0;
 
-  // Полная статистика для строк
-  private static int minStringLength = Integer.MAX_VALUE;
-  private static int maxStringLength = Integer.MIN_VALUE;
+  private static double floatSum = 0.0;
+  private static double floatMin = Double.MAX_VALUE; // Изначально максимально возможное значение
+  private static double floatMax = -Double.MAX_VALUE; // Изначально минимально возможное значение
+  private static double floatAvg = 0;
+
+  private static int minStringLength = Integer.MAX_VALUE; // Изначально минимальная длина строки
+  private static int maxStringLength = Integer.MIN_VALUE; // Изначально максимальная длина строки
 
   // Приватный конструктор, чтобы предотвратить создание экземпляров
   private FileStat() {
@@ -29,21 +25,23 @@ public class FileStat {
         "Этот класс утилитарный и не предназначен для создания экземпляров.");
   }
 
-  public static void addIntCount(long value) {
+  public static void processInt(long value) {
     intCount++;
-    intSum = intSum.add(BigInteger.valueOf(value));
+    intSum += value;
     intMin = Math.min(intMin, value);
     intMax = Math.max(intMax, value);
+    intAvg = (double) intSum / intCount;
   }
 
-  public static void addFloatCount(double value) {
+  public static void processFloat(double value) {
     floatCount++;
-    floatSum = floatSum.add(BigDecimal.valueOf(value));
+    floatSum += value;
     floatMin = Math.min(floatMin, value);
     floatMax = Math.max(floatMax, value);
+    floatAvg = floatSum / floatCount;
   }
 
-  public static void addStringCount(String value) {
+  public static void processString(String value) {
     stringCount++;
     int length = value.length();
     minStringLength = Math.min(minStringLength, length);
@@ -62,48 +60,35 @@ public class FileStat {
     return stringCount;
   }
 
-  // Метод для вычисления среднего значения для целых чисел
-  public static String getIntAverage() {
-    return intCount > 0 ? new BigDecimal(intSum)
-        .divide(BigDecimal.valueOf(intCount), 2, RoundingMode.HALF_UP)
-        .toString() : "N/A";
+  public static String getIntStat() {
+    if (intCount == 0) {
+      return "Integers: No data";
+    }
+    return "Integers\nSum: " + intSum + "\nMin: " + intMin + "\nMax: " + intMax + "\nAvg: "
+        + intAvg;
   }
 
-  // Метод для вычисления среднего значения для чисел с плавающей точкой
-  public static String getFloatAverage() {
-    return floatCount > 0 ? floatSum
-        .divide(BigDecimal.valueOf(floatCount), 2, RoundingMode.HALF_UP)
-        .toString() : "N/A";
+  public static String getFloatStat() {
+    if (floatCount == 0) {
+      return "Floats: No data";
+    }
+    return "Floats\nSum: " + floatSum + "\nMin: " + floatMin + "\nMax: " + floatMax + "\nAvg: "
+        + floatAvg;
   }
 
   public static String getShortStat() {
     return "Integers: " + intCount + "\nFloats: " + floatCount + "\nStrings: " + stringCount;
   }
 
-  public static String getIntStat() {
-    return "Integers \nSum: " + intSum +
-        "\nMin: " + (intCount > 0 ? intMin : "N/A") +
-        "\nMax: " + (intCount > 0 ? intMax : "N/A") +
-        "\nAvg: " + getIntAverage();
-  }
-
-  public static String getFloatStat() {
-    return "Floats \nSum: " + floatSum +
-        "\nMin: " + (floatCount > 0 ? floatMin : "N/A") +
-        "\nMax: " + (floatCount > 0 ? floatMax : "N/A") +
-        "\nAvg: " + getFloatAverage();
-  }
-
   public static String getStringStat() {
-    return "Strings \nMin length: " + (stringCount > 0 ? minStringLength : "N/A") +
-        "\nMax length: " + (stringCount > 0 ? maxStringLength : "N/A");
+    return "Strings \nMin length: " + (stringCount > 0 ? minStringLength : "N/A") + "\nMax length: "
+        + (stringCount > 0 ? maxStringLength : "N/A");
   }
 
   public static String getFullStat() {
     return getShortStat() + "\n" + getIntStat() + "\n" + getFloatStat() + "\n" + getStringStat();
   }
 
-  // Методы для вывода статистики в консоль
   public static void printShortStat() {
     System.out.println(getShortStat());
   }

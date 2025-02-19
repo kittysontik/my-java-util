@@ -31,7 +31,9 @@ public class FileReaderManager {
         openedFiles.add(openedFile);
 
       } catch (FileNotFoundException e) {
-        logger.log(Level.SEVERE, "Ошибка: файл '" + filename + "' не найден.");
+        if (logger.isLoggable(Level.SEVERE)) {
+          logger.log(Level.SEVERE, String.format("Ошибка: файл '%s' не найден.", filename), e);
+        }
       }
     }
     return openedFiles;

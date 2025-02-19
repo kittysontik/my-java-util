@@ -41,20 +41,19 @@ public class FileParser {
 
     Optional<Long> intValue = parseInteger(line);
     if (intValue.isPresent()) {
-      FileStat.addIntCount(intValue.get()); // Получаем значение, так как оно точно есть
+      FileStat.processInt(intValue.get()); // Получаем значение, так как оно точно есть
       FileWriterManager.writeToFile(FileWriterManager.intWriter, line);
       return;
     }
 
     Optional<Double> floatValue = parseFloat(line);
     if (floatValue.isPresent()) {
-      FileStat.addFloatCount(floatValue.get());
+      FileStat.processFloat(floatValue.get());
       FileWriterManager.writeToFile(FileWriterManager.floatWriter, line);
       return;
     }
-
     // Если не число, значит строка
-    FileStat.addStringCount(line);
+    FileStat.processString(line);
     FileWriterManager.writeToFile(FileWriterManager.stringWriter, line);
   }
 
@@ -73,7 +72,4 @@ public class FileParser {
       return Optional.empty();
     }
   }
-
 }
-
-

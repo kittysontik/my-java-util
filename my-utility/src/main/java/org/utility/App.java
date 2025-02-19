@@ -9,36 +9,36 @@ public class App {
 
   private static final Logger logger = Logger.getLogger(App.class.getName());
 
-  // входная точка для запуска программы
   public static void main(String[] args) {
     try {
-      ArgumentParser parser = new ArgumentParser();
-      parser.parseArguments(args);
+      ArgumentParser.parseArguments(args);
 
-      boolean appendMode = parser.isAppendMode();
-      String outputDirectory = parser.getOutputDirectory();
-      String prefix = parser.getPrefix();  // Получаем префикс
-      List<String> fileNames = parser.getFileNames();
+      boolean appendMode = ArgumentParser.isAppendMode();
+      String outputDirectory = ArgumentParser.getOutputDirectory();
+      String prefix = ArgumentParser.getPrefix();
+      List<String> fileNames = ArgumentParser.getFileNames();
 
       FileWriterManager.initWriters(prefix, outputDirectory, appendMode);
       List<BufferedReader> openedFiles = FileReaderManager.getOpenedFiles(fileNames);
       FileParser.parseFile(openedFiles);
       FileReaderManager.closeFiles(openedFiles);
-      if (parser.isShortStatOption()) {
-        System.out.println(FileStat.getShortStat());  // Печать статистики
-      } else if (parser.isFullStatOption()) {
-        System.out.println(FileStat.getFullStat());
+      if (ArgumentParser.isShortStatOption()) {
+        FileStat.printShortStat();
+      } else if (ArgumentParser.isFullStatOption()) {
+        FileStat.printFullStat();
       }
 
     } catch (IllegalArgumentException e) {
       logger.log(Level.SEVERE, e.getMessage());
       System.exit(1);
+    } catch (Exception e) {
+      if (logger.isLoggable(Level.SEVERE)) {
+        logger.log(Level.SEVERE, String.format("Произошла неожиданная ошибка: %s", e.getMessage()),
+            e);
+      }
+      System.exit(1);  // Завершаем программу, если произошла непредсказуемая ошибка
     } finally {
       FileWriterManager.closeWriters();
     }
   }
-
 }
-
-
-
