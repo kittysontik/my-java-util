@@ -6,6 +6,8 @@ import java.util.List;
 
 public class FileParser {
 
+  private static FileStat fileStat = new FileStat();
+
   public static void parseFile(List<BufferedReader> openedFiles) {
     boolean filesHaveLines = true;
     while (filesHaveLines) {
@@ -26,10 +28,13 @@ public class FileParser {
 
   public static void processLine(String line) {
     if (isInteger(line)) {
+      FileStat.incrementIntCount();
       FileWriterManager.writeToFile(FileWriterManager.intWriter, line);
     } else if (isFloat(line)) {
+      FileStat.incrementFloatCount();
       FileWriterManager.writeToFile(FileWriterManager.floatWriter, line);
     } else {
+      FileStat.incrementStringCount();
       FileWriterManager.writeToFile(FileWriterManager.stringWriter, line);
     }
   }

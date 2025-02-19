@@ -7,8 +7,9 @@ public class ArgumentParser {
 
   private boolean appendMode = false;
   private String outputDirectory = System.getProperty("user.dir"); // Текущая директория
-  private List<String> fileNames = new ArrayList<>();
+  private final List<String> fileNames = new ArrayList<>();
   private String prefix = "";
+  private boolean shortStatOption = false;
 
   // Геттер для префикса
   public String getPrefix() {
@@ -35,6 +36,9 @@ public class ArgumentParser {
             throw new IllegalArgumentException("Ошибка: после -p необходимо указать префикс.");
           }
           break;
+        case "-s":
+          shortStatOption = true;
+          break;
         default:
           fileNames.add(args[i]);
           break;
@@ -44,6 +48,7 @@ public class ArgumentParser {
     if (fileNames.isEmpty()) {
       throw new IllegalArgumentException("Ошибка: укажите хотя бы один файл для обработки.");
     }
+
   }
 
   public boolean isAppendMode() {
@@ -56,6 +61,10 @@ public class ArgumentParser {
 
   public List<String> getFileNames() {
     return fileNames;
+  }
+
+  public boolean isShortStatOption(){
+    return shortStatOption;
   }
 
 }
