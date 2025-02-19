@@ -1,4 +1,4 @@
-package main.java.org.utility;
+package org.utility;
 
 
 import java.io.*;
