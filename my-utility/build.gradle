@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.utility'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+
+application {
+    mainClass = 'org.utility.App'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.utility.App'
+    }
+}
