@@ -1,12 +1,21 @@
 package org.utility;
 
 
-import java.io.*;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FileReaderManager {
+
+  // Приватный конструктор, чтобы предотвратить создание экземпляров
+  private FileReaderManager() {
+    throw new UnsupportedOperationException(
+        "Этот класс утилитарный и не предназначен для создания экземпляров.");
+  }
 
   // метод, к-ый получает открытые файлы
   public static List<BufferedReader> getOpenedFiles(List<String> filenames) {

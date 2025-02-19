@@ -10,6 +10,7 @@ public class ArgumentParser {
   private final List<String> fileNames = new ArrayList<>();
   private String prefix = "";
   private boolean shortStatOption = false;
+  private boolean fullStatOption = false;
 
   // Геттер для префикса
   public String getPrefix() {
@@ -39,6 +40,9 @@ public class ArgumentParser {
         case "-s":
           shortStatOption = true;
           break;
+        case "-f":
+          fullStatOption = true;
+          break;
         default:
           fileNames.add(args[i]);
           break;
@@ -66,5 +70,10 @@ public class ArgumentParser {
   public boolean isShortStatOption(){
     return shortStatOption;
   }
+
+  public boolean isFullStatOption(){
+    return fullStatOption;
+  }
+
 
 }

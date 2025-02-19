@@ -1,14 +1,24 @@
 package org.utility;
 
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FileWriterManager {
 
   static BufferedWriter intWriter;
   static BufferedWriter floatWriter;
   static BufferedWriter stringWriter;
+
+  // Приватный конструктор, чтобы предотвратить создание экземпляров
+  private FileWriterManager() {
+    throw new UnsupportedOperationException(
+        "Этот класс утилитарный и не предназначен для создания экземпляров.");
+  }
 
   public static void initWriters(String prefix, String outputDirectory, boolean appendMode) {
     try {

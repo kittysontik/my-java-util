@@ -3,10 +3,15 @@ package org.utility;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public class FileParser {
 
-  private static FileStat fileStat = new FileStat();
+  // Приватный конструктор, чтобы предотвратить создание экземпляров
+  private FileParser() {
+    throw new UnsupportedOperationException(
+        "Этот класс утилитарный и не предназначен для создания экземпляров.");
+  }
 
   public static void parseFile(List<BufferedReader> openedFiles) {
     boolean filesHaveLines = true;
@@ -27,33 +32,40 @@ public class FileParser {
   }
 
   public static void processLine(String line) {
-    if (isInteger(line)) {
-      FileStat.incrementIntCount();
+    line = line.trim();
+
+    Optional<Long> intValue = parseInteger(line);
+    if (intValue.isPresent()) {
+      FileStat.addIntCount(intValue.get()); // Получаем значение, так как оно точно есть
       FileWriterManager.writeToFile(FileWriterManager.intWriter, line);
-    } else if (isFloat(line)) {
-      FileStat.incrementFloatCount();
+      return;
+    }
+
+    Optional<Double> floatValue = parseFloat(line);
+    if (floatValue.isPresent()) {
+      FileStat.addFloatCount(floatValue.get());
       FileWriterManager.writeToFile(FileWriterManager.floatWriter, line);
-    } else {
-      FileStat.incrementStringCount();
-      FileWriterManager.writeToFile(FileWriterManager.stringWriter, line);
+      return;
+    }
+
+    // Если не число, значит строка
+    FileStat.addStringCount(line);
+    FileWriterManager.writeToFile(FileWriterManager.stringWriter, line);
+  }
+
+  public static Optional<Long> parseInteger(String str) {
+    try {
+      return Optional.of(Long.parseLong(str)); // Если успешно, возвращаем Optional с числом
+    } catch (NumberFormatException e) {
+      return Optional.empty(); // Если ошибка, возвращаем пустой Optional
     }
   }
 
-  public static boolean isInteger(String str) {
+  public static Optional<Double> parseFloat(String str) {
     try {
-      Long.parseLong(str);
-      return true;
+      return Optional.of(Double.parseDouble(str));
     } catch (NumberFormatException e) {
-      return false;
-    }
-  }
-
-  public static boolean isFloat(String str) {
-    try {
-      Double.parseDouble(str);
-      return true;
-    } catch (NumberFormatException e) {
-      return false;
+      return Optional.empty();
     }
   }
 

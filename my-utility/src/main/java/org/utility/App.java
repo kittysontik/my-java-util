@@ -22,6 +22,8 @@ public class App {
       FileReaderManager.closeFiles(openedFiles);
       if (parser.isShortStatOption()) {
         System.out.println(FileStat.getShortStat());  // Печать статистики
+      } else if (parser.isFullStatOption()){
+        System.out.println(FileStat.getFullStat());
       }
 
     } catch (IllegalArgumentException e) {
