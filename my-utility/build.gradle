@@ -10,8 +10,6 @@ repositories {
     mavenCentral()
 }
 
-
-
 application {
     mainClass = 'org.utility.App'
 }
