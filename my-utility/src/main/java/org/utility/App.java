@@ -22,6 +22,7 @@ public class App {
       List<BufferedReader> openedFiles = FileReaderManager.getOpenedFiles(fileNames);
       FileParser.parseFile(openedFiles);
       FileReaderManager.closeFiles(openedFiles);
+
       if (ArgumentParser.isShortStatOption()) {
         FileStat.printShortStat();
       } else if (ArgumentParser.isFullStatOption()) {
