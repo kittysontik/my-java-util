@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class FileParser {
 
   private static final Logger logger = Logger.getLogger(FileParser.class.getName());

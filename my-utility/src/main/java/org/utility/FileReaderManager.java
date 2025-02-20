@@ -1,6 +1,5 @@
 package org.utility;
 
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public class FileReaderManager {
 
@@ -21,7 +19,6 @@ public class FileReaderManager {
         "Этот класс утилитарный и не предназначен для создания экземпляров.");
   }
 
-  // метод, к-ый получает открытые файлы
   public static List<BufferedReader> getOpenedFiles(List<String> filenames) {
     List<BufferedReader> openedFiles = new ArrayList<>();
 
@@ -39,7 +36,6 @@ public class FileReaderManager {
     return openedFiles;
   }
 
-  // метод, к-ый закрывает все файлы
   public static void closeFiles(List<BufferedReader> openedFiles) {
     for (BufferedReader openedFile : openedFiles) {
       try {

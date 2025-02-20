@@ -48,32 +48,25 @@ public class FileStat {
     maxStringLength = Math.max(maxStringLength, length);
   }
 
-  public static int getIntCount() {
-    return intCount;
-  }
-
-  public static int getFloatCount() {
-    return floatCount;
-  }
-
-  public static int getStringCount() {
-    return stringCount;
-  }
-
   public static String getIntStat() {
     if (intCount == 0) {
       return "Integers: No data";
     }
-    return "Integers\nSum: " + intSum + "\nMin: " + intMin + "\nMax: " + intMax + "\nAvg: "
-        + intAvg;
+    return String.format(
+        "Integers%nSum: %d%nMin: %d%nMax: %d%nAvg: %s",
+        intSum, intMin, intMax, intAvg
+    );
   }
 
   public static String getFloatStat() {
     if (floatCount == 0) {
       return "Floats: No data";
     }
-    return "Floats\nSum: " + floatSum + "\nMin: " + floatMin + "\nMax: " + floatMax + "\nAvg: "
-        + floatAvg;
+    return "Floats\n" +
+        "Sum: " + floatSum + "\n" +
+        "Min: " + floatMin + "\n" +
+        "Max: " + floatMax + "\n" +
+        "Avg: " + floatAvg;
   }
 
   public static String getShortStat() {
@@ -81,12 +74,16 @@ public class FileStat {
   }
 
   public static String getStringStat() {
-    return "Strings \nMin length: " + (stringCount > 0 ? minStringLength : "N/A") + "\nMax length: "
-        + (stringCount > 0 ? maxStringLength : "N/A");
+    return String.format(
+        "Strings%nMin length: %s%nMax length: %s",
+        stringCount > 0 ? minStringLength : "N/A",
+        stringCount > 0 ? maxStringLength : "N/A"
+    );
   }
 
   public static String getFullStat() {
-    return getShortStat() + "\n" + getIntStat() + "\n" + getFloatStat() + "\n" + getStringStat();
+    return String.format("%s%n%s%n%s%n%s", getShortStat(), getIntStat(), getFloatStat(),
+        getStringStat());
   }
 
   public static void printShortStat() {

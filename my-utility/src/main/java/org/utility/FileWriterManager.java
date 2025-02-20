@@ -47,7 +47,6 @@ public class FileWriterManager {
     }
   }
 
-  // метод для получения итогового названия выходного файла с префиксом и путем
   public static Map<String, String> getFileNames(String prefix, String outputDirectory) {
     Map<String, String> fileNames = new HashMap<>();
     fileNames.put("integers", getFileName(outputDirectory, prefix, "integers.txt"));
